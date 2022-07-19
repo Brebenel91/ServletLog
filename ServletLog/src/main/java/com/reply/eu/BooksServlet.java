@@ -36,19 +36,11 @@ public class BooksServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//		doGet(request,response);
-
-		
-		PrintWriter pr = response.getWriter();
-		pr.println("works from books");
-
 		
 		listBooks.add(new Book(++CONTOR,request.getParameter("isbn"), request.getParameter("authorName"), request.getParameter("publisher")));
 		response.getWriter().println("The book was successfully added to the list.");
-
 	}
-	
+
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int contor=Integer.parseInt(request.getParameter("ID"));
@@ -69,11 +61,12 @@ public class BooksServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int contor=Integer.parseInt(request.getParameter("ID"));
-
-		for(Book book:listBooks) {
-			if(contor==book.getID()) {
-				this.listBooks.remove(book);
-			}
+		if(listBooks.size()!=0 && contor<=listBooks.size()) {
+		Book book=listBooks.get(contor-1);
+		this.listBooks.remove(book);
+		response.getWriter().println("The book was successfully deleted.");
+		}else {
+			response.getWriter().println("The ID you mentioned doesn't exist.");
 		}
 	}
 	
