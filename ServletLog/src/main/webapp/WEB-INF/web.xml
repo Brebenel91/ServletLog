@@ -32,6 +32,13 @@
 	<servlet-name>BooksServlet</servlet-name>
 	<url-pattern>/books</url-pattern>
 	</servlet-mapping>
-	
 
+	<filter>
+        <filter-name>BooksFilter</filter-name>
+        <filter-class>com.reply.eu.BooksFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>BooksFilter</filter-name>
+        <url-pattern>/books</url-pattern>
+    </filter-mapping>
 </web-app>
