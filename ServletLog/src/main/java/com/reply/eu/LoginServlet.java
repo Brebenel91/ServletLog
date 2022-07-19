@@ -22,18 +22,30 @@ public class LoginServlet extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	PrintWriter out = response.getWriter();
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	PrintWriter out = res.getWriter();
 	out.print("login");
 		
-//		Cookie cookie = new Cookie("yes","no");
-//		response.addCookie(cookie);
+
+
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-		doGet(request, response);
+		PrintWriter pw = res.getWriter();
+		res.setContentType("text/html");
+		
+		String user = req.getParameter("userName");
+		String pass = req.getParameter("userPassword");
+		
+		if("ReplyTeam".equals(user) && "Reply123".equals(pass)) {
+			pw.println("Login Succesful");
+			
+		} else {
+			pw.println("Authentification Failed!");
+			pw.close();
+		}
 	}
 
 }
