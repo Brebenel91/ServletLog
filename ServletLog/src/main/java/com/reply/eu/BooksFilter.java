@@ -45,6 +45,7 @@ public class BooksFilter extends HttpFilter implements Filter {
 		if (cookie == null) {
 			RequestDispatcher rd = req.getRequestDispatcher("login");
 			rd.forward(req, res);
+			return;
 		}
 		chain.doFilter(request, response);
 		

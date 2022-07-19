@@ -41,11 +41,14 @@ public class LoginServlet extends HttpServlet {
 		
 		if("ReplyTeam".equals(user) && "Reply123".equals(pass)) {
 			pw.println("Login Succesful");
-			
+			Cookie cookie = new Cookie("cookie", "1");
+			res.addCookie(cookie);
 		} else {
 			pw.println("Authentification Failed!");
 			pw.close();
 		}
 	}
+
+
 
 }

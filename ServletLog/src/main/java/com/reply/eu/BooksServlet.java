@@ -2,10 +2,17 @@ package com.reply.eu;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.connector.Response;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.*;
 import javax.servlet.annotation.WebServlet;
 
@@ -17,26 +24,39 @@ import javax.servlet.annotation.WebServlet;
 //@WebServlet("/books")
 public class BooksServlet extends HttpServlet {
 	
-	private static List<Book> listBooks=new ArrayList<Book>();
-	private int CONTOR=0;
+	
+	
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(listBooks.isEmpty()){
+		ObjectMapper mapper = new ObjectMapper(); 
+		if(BooksList.booksList.isEmpty()){
 			response.getWriter().println("The list is empty.");
 		}else{
-			response.getWriter().println("There are "+listBooks.size()+" books.");
-			for(Book b:listBooks) {
-				response.getWriter().println(b);
+			response.getWriter().println("There are "+BooksList.booksList.size()+" books.");
+			for(Book b:BooksList.booksList) {
+				String bookJson =  mapper.writeValueAsString(b);
+				response.getWriter().println(bookJson);
 			}
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 ObjectMapper mapper = new ObjectMapper();
+		  
+		if(("json").equalsIgnoreCase(request.getContentType())) {
+			String body = Service.getBody(request);
+			TypeReference<Book> typeRef= new TypeReference<Book>() {};
+			Book obj = mapper.readValue(body, typeRef);
+			BooksList.booksList.add(obj);
+		}else {
+			response.setStatus(Response.SC_BAD_REQUEST);
+		}
 		
-		listBooks.add(new Book(++CONTOR,request.getParameter("isbn"), request.getParameter("authorName"), request.getParameter("publisher")));
-		response.getWriter().println("The book was successfully added to the list.");
+		
+//		response.getWriter().println("The book was successfully added to the list.");
+		
 	}
 
 	@Override
@@ -45,14 +65,14 @@ public class BooksServlet extends HttpServlet {
 		String changeIsbn=request.getParameter("changeIsbnWith");
 		String changeAuthorName=request.getParameter("changeAuthorNameWith");
 		String changePublisher=request.getParameter("changePublisherWith");
-		for(Book book:listBooks) {
+		for(Book book:BooksList.booksList) {
 			if(contor==book.getID()) {
 				book.setIsbn(changeIsbn);
 				book.setAuthorName(changeAuthorName);
 				book.setPublisher(changePublisher);
 			}
 		}
-		for(Book b:listBooks) {
+		for(Book b:BooksList.booksList) {
 			response.getWriter().println(b);
 			}
 	}
@@ -61,9 +81,9 @@ public class BooksServlet extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int contor=Integer.parseInt(request.getParameter("ID"));
 
-		for(Book book:listBooks) {
+		for(Book book:BooksList.booksList) {
 			if(contor==book.getID()) {
-				this.listBooks.remove(book);
+				BooksList.booksList.remove(book);
 			}
 		}
 	}
