@@ -3,6 +3,7 @@ package com.reply.eu;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -43,6 +44,8 @@ public class LoginServlet extends HttpServlet {
 			pw.println("Login Succesful");
 			Cookie cookie = new Cookie("cookie", "1");
 			res.addCookie(cookie);
+			RequestDispatcher rd = req.getRequestDispatcher("/books");
+			rd.forward(req, res);
 		} else {
 			pw.println("Authentification Failed!");
 			pw.close();
