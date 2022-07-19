@@ -48,6 +48,13 @@ public class Book {
 		this.bookID=bookID;
 	}
 	
+	public String toString() {
+		StringBuilder stringBuilder=new StringBuilder();
+		stringBuilder.append("Book #"+this.getID()+" isbn= "+this.getIsbn()+" authorName= "+this.getAuthorName()+" publisher= "+this.getPublisher());
+		return stringBuilder.toString();
+	}
+	
+	
 	
 	
 
