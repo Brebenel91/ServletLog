@@ -3,6 +3,7 @@ package com.reply.eu;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -41,6 +42,8 @@ public class LoginServlet extends HttpServlet {
 		
 		if("ReplyTeam".equals(user) && "Reply123".equals(pass)) {
 			pw.println("Login Succesful");
+			RequestDispatcher rd = req.getRequestDispatcher("/books");
+			rd.forward(req, res);
 			
 		} else {
 			pw.println("Authentification Failed!");

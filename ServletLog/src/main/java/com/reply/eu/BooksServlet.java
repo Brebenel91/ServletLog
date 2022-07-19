@@ -1,6 +1,8 @@
 package com.reply.eu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -31,10 +33,13 @@ public class BooksServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+//		doGet(request,response);
 
+		
+		PrintWriter pr = response.getWriter();
+		pr.println("works from books");
 	}
-
+	
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int contor=Integer.parseInt(request.getParameter("ID"));
