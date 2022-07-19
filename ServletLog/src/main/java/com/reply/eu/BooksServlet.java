@@ -45,16 +45,15 @@ public class BooksServlet extends HttpServlet {
 		String changeIsbn=request.getParameter("changeIsbnWith");
 		String changeAuthorName=request.getParameter("changeAuthorNameWith");
 		String changePublisher=request.getParameter("changePublisherWith");
-		for(Book book:listBooks) {
-			if(contor==book.getID()) {
-				book.setIsbn(changeIsbn);
-				book.setAuthorName(changeAuthorName);
-				book.setPublisher(changePublisher);
-			}
+		if(listBooks.size()!=0 && contor<=listBooks.size()) {
+		Book book=listBooks.get(contor-1);
+		book.setIsbn(changeIsbn);
+		book.setAuthorName(changeAuthorName);
+		book.setPublisher(changePublisher);
+		response.getWriter().println("The book was successfully updated.");
+		} else {
+			response.getWriter().println("The ID you mentioned doesn't exist.");
 		}
-		for(Book b:listBooks) {
-			response.getWriter().println(b);
-			}
 	}
 
 	@Override
