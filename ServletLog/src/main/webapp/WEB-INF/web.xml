@@ -13,8 +13,7 @@
 		<welcome-file>default.htm</welcome-file>
 	</welcome-file-list>
 
-
-	<servlet>
+<servlet>
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>com.reply.eu.LoginServlet</servlet-class>
 	</servlet>
@@ -33,4 +32,6 @@
 	<servlet-name>BooksServlet</servlet-name>
 	<url-pattern>/books</url-pattern>
 	</servlet-mapping>
+	
+
 </web-app>
