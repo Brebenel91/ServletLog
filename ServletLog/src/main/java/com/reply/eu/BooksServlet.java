@@ -24,20 +24,29 @@ public class BooksServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Book book=new Book(++CONTOR,request.getParameter("isbn"), request.getParameter("authorName"), request.getParameter("publisher"));
-		listBooks.add(book);
-		for(Book b:listBooks) {
-			response.getWriter().println("Book #"+ b.getID() +" isbn= "+b.getIsbn()+" "+" authorName= "+b.getAuthorName()+" "+" publisher= "+b.getPublisher());
+		if(listBooks.isEmpty()){
+			response.getWriter().println("The list is empty.");
+		}else{
+			response.getWriter().println("There are "+listBooks.size()+" books.");
+			for(Book b:listBooks) {
+				response.getWriter().println(b);
 			}
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 //		doGet(request,response);
 
 		
 		PrintWriter pr = response.getWriter();
 		pr.println("works from books");
+
+		
+		listBooks.add(new Book(++CONTOR,request.getParameter("isbn"), request.getParameter("authorName"), request.getParameter("publisher")));
+		response.getWriter().println("The book was successfully added to the list.");
+
 	}
 	
 	@Override
@@ -54,7 +63,7 @@ public class BooksServlet extends HttpServlet {
 			}
 		}
 		for(Book b:listBooks) {
-			response.getWriter().println("Book #"+ b.getID() +" isbn= "+b.getIsbn()+" "+" authorName= "+b.getAuthorName()+" "+" publisher= "+b.getPublisher());
+			response.getWriter().println(b);
 			}
 	}
 
@@ -68,5 +77,6 @@ public class BooksServlet extends HttpServlet {
 			}
 		}
 	}
+	
 
 }

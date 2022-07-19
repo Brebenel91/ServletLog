@@ -1,13 +1,13 @@
 package com.reply.eu;
 
-import java.util.*;
-
 public class Book {
 	
 	private int bookID;
 	private String isbn;
 	private String authorName;
 	private String publisher;
+	
+	public Book() {}
 	
 	public Book(int bookID,String isbn, String authorName, String publisher) {
 		this.bookID=bookID;
@@ -47,6 +47,13 @@ public class Book {
 	public void setID(int bookID) {
 		this.bookID=bookID;
 	}
+	
+	public String toString() {
+		StringBuilder stringBuilder=new StringBuilder();
+		stringBuilder.append("Book #"+this.getID()+" isbn= "+this.getIsbn()+" authorName= "+this.getAuthorName()+" publisher= "+this.getPublisher());
+		return stringBuilder.toString();
+	}
+	
 	
 	
 	
