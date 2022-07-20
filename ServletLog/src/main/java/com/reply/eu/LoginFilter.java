@@ -1,7 +1,6 @@
 package com.reply.eu;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,9 +12,11 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class BooksFilter extends HttpFilter implements Filter {
+import org.apache.catalina.connector.Response;
 
-	public BooksFilter() {
+public class LoginFilter extends HttpFilter implements Filter {
+
+	public LoginFilter() {
 		super();
 
 	}
@@ -29,13 +30,14 @@ public class BooksFilter extends HttpFilter implements Filter {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		Cookie[] cookie = req.getCookies();
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
 		
-		if (cookie == null) {
-			res.sendRedirect("login");
-
+		if (username == null || username == "" || password == null || password == "") {
+			res.setStatus(Response.SC_UNAUTHORIZED);
+		} else {
+			chain.doFilter(request, response);
 		}
-		chain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

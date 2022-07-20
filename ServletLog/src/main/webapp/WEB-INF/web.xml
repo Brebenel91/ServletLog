@@ -42,4 +42,33 @@
         <filter-name>BooksFilter</filter-name>
         <url-pattern>/books</url-pattern>
     </filter-mapping>
+    
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.reply.eu.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+    
+    <servlet>
+		<servlet-name>CreateBook</servlet-name>
+		<servlet-class>com.reply.eu.BooksServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>CreateBook</servlet-name>
+	<url-pattern>/createBook</url-pattern>
+	</servlet-mapping>
+	
+	<!-- <servlet>
+		<servlet-name>DeleteteBook</servlet-name>
+		<servlet-class>com.reply.eu.BooksServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>DeleteteBook</servlet-name>
+	<url-pattern>/deleteBook</url-pattern>
+	</servlet-mapping> -->
 </web-app>
