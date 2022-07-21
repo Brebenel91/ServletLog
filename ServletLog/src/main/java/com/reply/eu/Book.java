@@ -34,17 +34,14 @@ public class Book {
 	}
 
 	public Book(String title, String author) {
-		super();
-		id = counter;
-		counter++;
+		this();
 		this.title = title;
 		this.author = author;
 	}
 
 	public Book() {
 		super();
-		id = counter;
-		counter++;
+		id = counter++;
 	}
 
 	@Override

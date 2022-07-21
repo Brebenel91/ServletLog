@@ -3,6 +3,7 @@ package com.reply.eu;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +19,10 @@ public class UpdateBookServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		if (Integer.parseInt(request.getParameter("id")) >= 0
-				&& Integer.parseInt(request.getParameter("id")) < BooksList.bookList.size() && request.getParameter("id") !=null ) {
+				&& Integer.parseInt(request.getParameter("id")) < BooksList.bookList.size()
+				&& request.getParameter("id") != null) {
 			Book book2update = BooksList.bookList.get(Integer.parseInt(request.getParameter("id")));
 
 //					.setTitle(request.getParameter("title"));
@@ -54,6 +56,10 @@ public class UpdateBookServlet extends HttpServlet {
 					.setTitle(request.getParameter("title"));
 			BooksList.bookList.get(Integer.parseInt(request.getParameter("id")))
 					.setAuthor(request.getParameter("author"));
+
+			RequestDispatcher reqDisp = getServletContext().getRequestDispatcher("/readBooks.jsp");
+			reqDisp.forward(request, response);
+			//response.sendRedirect("readBooks.jsp");
 		} else {
 			response.setStatus(Response.SC_BAD_REQUEST);
 		}
