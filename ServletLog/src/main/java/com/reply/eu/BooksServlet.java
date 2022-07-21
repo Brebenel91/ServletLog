@@ -14,15 +14,17 @@ public class BooksServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		if (BooksList.bookList == null) {
-			response.setStatus(Response.SC_BAD_REQUEST);
-		} else {
-			for (Book b : BooksList.bookList) {
-				response.getWriter().println(b);
-			}
-			
-		}
-
+		response.sendRedirect("readBooks.jsp");
+		
+//		if (BooksList.bookList == null) {
+//			response.setStatus(Response.SC_BAD_REQUEST);
+//		} else {
+//			for (Book b : BooksList.bookList) {
+//				//response.getWriter().println(b);
+//				
+//			}
+//		}
+		
 //		PrintWriter out = response.getWriter();
 //		ObjectMapper objectMapper = new ObjectMapper();
 //		for (Book b : BooksList.bookList) {
