@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 public class DeleteBookServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if (Integer.parseInt(req.getParameter("id")) >= 0
 				&& Integer.parseInt(req.getParameter("id")) < BooksList.bookList.size()) {
 			BooksList.bookList.remove(Integer.parseInt(req.getParameter("id")));
-			resp.sendRedirect("index");
+			resp.sendRedirect("readBooks.jsp");
 		}
 	}
 

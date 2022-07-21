@@ -41,8 +41,9 @@ public class BooksServlet extends HttpServlet {
 			response.setStatus(Response.SC_BAD_REQUEST);
 		} else {
 			BooksList.bookList.add(book);
+			response.sendRedirect("readBooks.jsp");
 		}
-
+		
 //		if ("application/json".equals(request.getHeader("content-type"))) {
 //			ObjectMapper objectMapper = new ObjectMapper();
 //			String body = Services.getBody(request);
