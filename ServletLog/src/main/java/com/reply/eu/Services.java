@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.connector.Response;
 
 public class Services {
 
@@ -41,5 +44,26 @@ public class Services {
 
 		body = stringBuilder.toString();
 		return body;
+	}
+
+	public static int verifyId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		if (request.getParameter("id") == null) {
+			response.setStatus(Response.SC_BAD_REQUEST);
+			response.getWriter().write("Missing parameter");
+		}
+		int id = -1;
+		try {
+			id = Integer.parseInt(request.getParameter("id"));
+		} catch (NumberFormatException e) {
+			response.setStatus(Response.SC_BAD_REQUEST);
+			response.getWriter().write("Id is not a number");
+		}
+
+		if (id < 0 || id >= BooksList.bookList.size()) {
+			response.setStatus(Response.SC_BAD_REQUEST);
+			response.getWriter().write("Book id not found");
+		}
+		return id;
 	}
 }

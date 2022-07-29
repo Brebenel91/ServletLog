@@ -1,4 +1,4 @@
-package com.reply.eu;
+package com.reply.eu.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,8 @@ public class Book {
 	private int id;
 	private String title;
 	private String author;
+	private String genre;
+	private String isbn;
 
 	public int getId() {
 		return id;
@@ -33,10 +35,39 @@ public class Book {
 		this.author = author;
 	}
 
-	public Book(String title, String author) {
-		this();
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	
+	public Book(int id, String title, String author, String genre, String isbn) {
+		super();
+		this.id = id;
 		this.title = title;
 		this.author = author;
+		this.genre = genre;
+		this.isbn = isbn;
+	}
+
+	
+	public Book(String title, String author, String genre, String isbn) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.genre = genre;
+		this.isbn = isbn;
 	}
 
 	public Book() {
